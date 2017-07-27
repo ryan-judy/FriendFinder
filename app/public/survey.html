@@ -153,7 +153,7 @@
 				</div>
 
 
-				<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
+				<button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
 		 Submit</button>
 
 				<hr>
@@ -164,8 +164,29 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Your Best Friend Match Is...</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class = "friend-info">
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<script type="text/javascript">
+		$('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').focus()
+		})
 		$("#submit").on("click", function(event) {
 	      event.preventDefault();
 	      var newFriend = {
@@ -188,10 +209,9 @@
 
 	      $.post("/api/friends", newFriend)
 	      .done(function(data) {
-	        console.log(data);
-	        alert("Adding Friend...");
+	        console.log(data.matchImage);
+	        $(".friend-info").append(data.matchName + "<br>" + "<img src ='" + data.matchImage + "'</img>");
 	      });
-		location.reload();
 	    });
 	</script>
 </body>
