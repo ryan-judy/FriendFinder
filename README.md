@@ -12,3 +12,5 @@ A compatibility-based "FriendFinder" application. This full-stack application ta
 4. CSS
 5. JavaScript
 6. Jquery
+
+[View the application live on Heroku!](https://serene-escarpment-29029.herokuapp.com/)
